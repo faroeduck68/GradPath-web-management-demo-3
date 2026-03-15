@@ -1,0 +1,95 @@
+spring:
+  application:
+    name: GradPath
+
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/duck5?serverTimezone=Asia/Shanghai&characterEncoding=utf-8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+
+  data:
+   redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 0
+    timeout: 5000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+
+  # 文件上传配置
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  # 静态资源配置
+  web:
+    resources:
+      add-mappings: true
+
+  # 开发工具配置
+  devtools:
+    restart:
+      enabled: false
+
+# 服务器配置
+server:
+  port: 8080
+
+# Mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.domain
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    lazy-loading-enabled: false
+
+# 日志配置
+logging:
+  level:
+    com: DEBUG
+    com.mapper: DEBUG
+    org.springframework.web: DEBUG
+    org.apache.ibatis: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+# 阿里云OSS
+aliyun:
+  oss:
+    endpoint: https://oss-cn-hangzhou.aliyuncs.com
+    bucketName: duck-warehorse
+    region: cn-hangzhou
+
+# DeepSeek配置
+deepseek:
+  api-key: sk-fd458b5775c34d26ab186e51e2fa2acc
+  api-url: https://api.deepseek.com/chat/completions
+
+# Judge0配置
+judge0:
+  base-url: http://127.0.0.1:2358
+  api-key:
+  poll-interval-ms: 500
+  max-poll-count: 20
+
+# 面试模块配置
+interview:
+  stt:
+    # 使用DashScope SDK，只需api-key，无需api-url
+    api-key: sk-e6e250ed25d74c8e9c2129296166aac4
+  tts:
+    # 使用DashScope SDK，只需api-key，无需api-url
+    api-key: sk-e6e250ed25d74c8e9c2129296166aac4
+    voice: longxiaochun
+  llm:
+    model: deepseek-chat

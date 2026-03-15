@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+/* ============================================
+   GradPath — LeetCode Dark Theme Tokens
+   Tailwind CSS v4 @theme configuration
+   ============================================ */
+@theme {
+  /* Background */
+  --color-lc-main: #1a1a1a;
+  --color-lc-panel: #262626;
+  --color-lc-hover: #2c2c2c;
+  --color-lc-highlight: #333333;
+
+  /* Border */
+  --color-lc-border: #3e3e3e;
+
+  /* Text */
+  --color-lc-text: #eff1f6;
+  --color-lc-gray: #8a8a8e;
+
+  /* Brand / Status */
+  --color-lc-orange: #ffa116;
+  --color-lc-green: #2cbb5d;
+  --color-lc-yellow: #ffc01e;
+  --color-lc-red: #ff375f;
+}
+
+/* ============================================
+   Global Reset & Base Styles
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  color: var(--color-lc-text);
+  background-color: var(--color-lc-main);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Scrollbar styling (Webkit) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-lc-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-lc-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

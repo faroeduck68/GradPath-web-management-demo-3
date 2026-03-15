@@ -13,6 +13,9 @@ import java.util.Map;
 import com.mapper.SubmissionMapper;
 import com.domain.Submission;
 import java.util.Date;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/ai")
@@ -107,11 +110,38 @@ public class AIController {
     }
 
 
-    // ============== 题目列表接口 ==============
+    // ============== 题目列表接口（支持分页、排序和搜索）==============
     @GetMapping("/list")
-    public Result list() {
-        List<AiQuestion> questions = aiQuestionMapper.selectAll();
-        return Result.success(questions);
+    public Result list(
+            @RequestParam(defaultValue = "1") Integer pageNum,
+            @RequestParam(defaultValue = "9") Integer pageSize,
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String orderBy,
+            @RequestParam(required = false) String orderDirection
+    ) {
+        // 设置默认排序
+        if (orderBy == null || orderBy.isEmpty()) {
+            orderBy = "create_time";
+            orderDirection = "DESC";
+        }
+        if (orderDirection == null || orderDirection.isEmpty()) {
+            orderDirection = "DESC";
+        }
+
+        // 启动分页
+        PageHelper.startPage(pageNum, pageSize);
+        List<AiQuestion> questions = aiQuestionMapper.selectByPage(keyword, orderBy, orderDirection);
+        PageInfo<AiQuestion> pageInfo = new PageInfo<>(questions);
+
+        // 构造返回数据
+        Map<String, Object> result = new HashMap<>();
+        result.put("list", pageInfo.getList());
+        result.put("total", pageInfo.getTotal());
+        result.put("pageNum", pageInfo.getPageNum());
+        result.put("pageSize", pageInfo.getPageSize());
+        result.put("pages", pageInfo.getPages());
+
+        return Result.success(result);
     }
 
     // ============== 题目详情接口 ==============

@@ -1,13 +1,14 @@
 package com.controller;
 
 import cn.hutool.json.JSONObject;
-import com.pojo.Result; // 假设你有统一返回类
-import com.dto.CodeRunDTO; // 假设你的参数封装类
+import com.pojo.Result;
+import com.dto.CodeRunDTO;
 import com.service.JudgeService;
-import com.service.AIService; // 引入 AI 服务
+import com.service.AIService; // 保留这个
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+// ... 后面的代码不用动 ...
 @RestController
 @RequestMapping("/api/judge")
 public class JudgeController {
